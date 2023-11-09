@@ -1,0 +1,68 @@
+#include <stdio.h>
+
+int main() {
+
+    int arr[10][10];
+    int min,n,m,i,j,count =0;
+    printf("Enter a matrix size : ");
+    scanf("%d",&n);
+    scanf("%d",&m);
+    printf("Enter the elements of matrix(0 or 1) : \n");
+    for(i=0; i<n; i++){
+                printf("\n");
+        for(j=0; j<m; j++){
+            scanf("%d",&arr[i][j]);
+        }
+                printf("\n");
+    }
+
+    int r[10];
+    for(int i=0; i<n; i++){
+        for(int j=0; j<m; j++){
+            if(arr[i][j] == 1){
+                count += 1;
+            }
+        }
+        r[i] = count;
+        count =0;
+    }
+
+    int p[10];
+    
+    for(int i=0; i<n ; i++){
+        p[i] = r[i];
+    }
+
+    int temp ;
+    for(int i =0; i<n; i++){
+        for(int j =i+1; j<n; j++){
+            if(p[i]>p[j]){
+                temp = p[i];
+                p[i] = p[j];
+                p[j] = temp;
+            }
+        }
+    }
+    
+    for(int i =0; i<n; i++){
+        for(int j =i+1; j<n; j++){
+            if(p[i]==p[j]){
+                p[j] = p[j+1];
+                n -= 1;
+                
+            }
+        }
+    }
+ 
+    for(int i=0; i<n-1; i++){
+        for(int j=0; j<n; j++){
+            if(p[i]==r[j]){
+                printf("%d\t",j);
+
+            }
+        }
+    }
+    
+
+    return 0;
+}
